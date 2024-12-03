@@ -4,7 +4,6 @@ with open("input 1.txt", "r") as text:
     nums = [int(x) for x in text.read().split()]
     set1 = nums[::2]
     set2 = nums[1::2]
-
 set1.sort()
 set2.sort()
 
@@ -20,4 +19,3 @@ for number in set1:
     diff_score += number * set2_count[number]
 print(f"The difference is {diff}")
 print(f"The diff score is {diff_score}")
-
