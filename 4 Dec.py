@@ -16,60 +16,50 @@ def transpose_crossword(crossword: List[str]) -> List[str]:
 def all_indices(search_from: str, target: str) -> List[int]:
     return [index for index, letter in enumerate(search_from) if letter == target]
 
-def count_diagonal_xmas(crosswords: List[str]) -> int:
-    count: int = 0
-    
-    # Loop for when 'X' is the highest letter
+def count_diagonal_xmas(crosswords):
+    count = 0
     for index, line in enumerate(crosswords):
-        indices_of_x: List[int] = all_indices(line, "X")
+        indices_of_x = all_indices(line, "X")
         for line_index in indices_of_x:
-            if(
-                (crosswords[index+1][line_index+1] == "M"
-                and crosswords[index+2][line_index+2] == "A"
-                and crosswords[index+3][line_index+3] == "S")
-             ):
-                count += 1
-            """
-            X...
-            .M..
-            ..A.
-            ...S
-            """
-            
-            if(
-                (crosswords[index+1][line_index-1] == "M"
-                 and crosswords[index+2][line_index-2] == "A"
-                 and crosswords[index+3][line_index] == "S")
-            ):
-                count += 1
-            """
-            ...X
-            ..M.
-            .A..
-            S...
-            """
-    
-    # Loop for when "X" is the lowest letter
-    for index, line in enumerate(crosswords):
-        indices_of_x: List[int] = all_indices(line, "X")
-        for line_index in indices_of_x:
-            if(
-                (crosswords[index-1][line_index+1] == "M"
-                and crosswords[index-2][line_index+2] == "A"
-                and crosswords[index-3][line_index+3] == "S")
-             ):
-                count += 1
-
-        indices_of_x: List[int] = all_indices(line, "X")
-        for line_index in indices_of_x:
-            if(
-                (crosswords[index-1][line_index-1] == "M"
-                and crosswords[index-2][line_index-2] == "A"
-                and crosswords[index-3][line_index-3] == "S")
-             ):
-                count += 1
+            try:
+                #X...
+                #.M..
+                #..A.
+                #...S
+                if (crosswords[index+1][line_index+1] == "M"
+                    and crosswords[index+2][line_index+2] == "A"
+                    and crosswords[index+3][line_index+3] == "S"):
+                    count += 1
+                #...X
+                #..M.
+                #.A..
+                #S...
+                elif (crosswords[index+1][line_index-1] == "M"
+                     and crosswords[index+2][line_index-2] == "A"
+                     and crosswords[index+3][line_index] == "S"):
+                    count += 1
+                #...S
+                #..A.
+                #.M..
+                #X...
+                elif (crosswords[index-1][line_index+1] == "M"
+                     and crosswords[index-2][line_index+2] == "A"
+                     and crosswords[index-3][line_index+3] == "S"):
+                    count += 1
+                #S...
+                #.A..
+                #..M.
+                #...X
+                elif (crosswords[index-1][line_index-1] == "M"
+                     and crosswords[index-2][line_index-2] == "A"
+                     and crosswords[index-3][line_index-3] == "S"):
+                    count += 1
+            except IndexError:
+                pass
     return count
 
+def all_indices(string, char):
+    return [i for i, c in enumerate(string) if c == char]
 def main():
     tally: int = 0
     with open(FILE_NAME, "r") as f:
@@ -83,7 +73,7 @@ def main():
     try:
         tally += count_diagonal_xmas(crosswords)
     except IndexError:
-        continue
+        pass
     
     print(tally)
 
