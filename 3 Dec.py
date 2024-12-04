@@ -1,3 +1,6 @@
+"""Solutions for Advent of Code 2024 Day 3"""
+
+__author__ = "Hannah Kan"
 import re as regex
 from typing import List, Tuple
 
@@ -30,14 +33,12 @@ def main():
         + [substr[1:].split('do()') for substr in bad_mem.split("don't()")[1:]] )
     find_enabled: List[str] = ["".join(string[1:]) if len(string) >= 2 else "" for string in slice_by_disabled]
     
-    # print(slice_by_disabled)
     
     enabled_muls: List[Tuple[int, int]] = build_list_of_muls("".join(find_enabled))
     for operand_pair in enabled_muls:
         part_2_sumproduct += mul(operand_pair)
     print(f"part 2: {part_2_sumproduct}")
-    
-    # print([build_list_of_muls(substr) for substr in slice_by_disabled])
+
 
 def build_list_of_muls(bad_mem) -> List[tuple[int, int]]:
     return [tuple(int(num) for num in args[4:-1].split(',')) for args in find_valid_muls(bad_mem)]
