@@ -1,3 +1,7 @@
+"""Solutions for Advent of Code 2024 Day 1"""
+
+__author__ = "Hannah Kan"
+
 from collections import Counter
 
 with open("input 1.txt", "r") as text:
@@ -6,7 +10,6 @@ with open("input 1.txt", "r") as text:
     set2 = nums[1::2]
 set1.sort()
 set2.sort()
-
 diff = 0
 diff_score = 0
 for elem in range(len(set1)):

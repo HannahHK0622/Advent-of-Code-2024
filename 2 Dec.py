@@ -1,3 +1,7 @@
+"""Solutions for Advent of Code 2024 Day 2"""
+
+__author__ = "Hannah Kan"
+
 from typing import List
 
 FILE_NAME = "input 2.txt"
